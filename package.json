@@ -4,9 +4,11 @@
   "description": "An App to handle core banking applications",
   "main": "\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001bapp\u001b[C\u001b\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b.js)\u001b[C\u001b",
   "scripts": {
-    "start": "babel-node app.js",
-    "bootcamp:build": "babel app.js -d build && build/app.js",
-    "dev": "nodemon app.js --exec babel-node --presets babel-preset-env",
+    "start": "babel-node server/app.js",
+    "bootcamp:build": "babel server/app.js -d build && build/server/app.js",
+    "ayo": "nodemon server/ayomide/app.js --exec babel-node --presets babel-preset-env ",
+    "example": "nodemon example.js --exec babel-node --presets babel-preset-env ",
+    "dev": "nodemon server/app.js --exec babel-node --presets babel-preset-env",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test"
@@ -26,14 +28,19 @@
   },
   "homepage": "https://github.com/TamunoibiAprekuma/Banka#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "mailgun-js": "^0.22.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.0",
-    "swagger-jsdoc": "^3.2.9"
+    "password-hash": "^1.2.2",
+    "swagger-jsdoc": "^3.2.9",
+    "validate.js": "^0.12.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -51,8 +58,6 @@
     "chai-http": "^4.3.0",
     "coveralls": "^3.0.3",
     "cross-env": "^5.2.0",
-    "debug": "^4.1.1",
-    "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",
