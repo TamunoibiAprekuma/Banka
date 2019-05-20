@@ -25,6 +25,7 @@
         "object-curly-newline" : 0,
         "array-callback-return": 0,
         "consistent-return" : 0,
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
         "prefer-destructuring": 0,
         "no-console": "off",
         "linebreak-style": 0

@@ -1,9 +1,12 @@
 import express from 'express';
+import AuthValidator from '../middlewares/AuthValidator';
 import userController from '../controllers/userController';
-import Middleware from '../middlewares';
+
+const { validateSignUp, userExists } = AuthValidator;
+const { createAccount } = userController;
 
 const userRoute = express.Router();
 
-userRoute.post('/signup', Middleware.validateSignUp);
+userRoute.post('/signup', validateSignUp, userExists, createAccount);
 
 export default userRoute;

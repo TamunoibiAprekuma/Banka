@@ -1,14 +1,18 @@
 import Helpers from '../helpers/Helpers';
 
+
+import userModel from '../models/userModel';
+
 const { extractErrors } = Helpers;
+const { getUser } = userModel;
 
 
-export default class Middleware {
+export default class AuthValidator {
   /**
    * validates user sign up inputs
-   * @param {object} req
-   * @param {object} res
-   * @param {callback} next
+   * @param {object} req - The request entered by the user.
+   * @param {object} res - The response sent to the user is error if validation fails
+   * @param {callback} next - The next middleware is called if validation is successful
    */
   static validateSignUp(req, res, next) {
     req.check('firstName', 'First Name is required').notEmpty().trim();
@@ -28,6 +32,15 @@ export default class Middleware {
         errors: extractErrors(errors),
         status: 400,
       });
+    }
+    return next();
+  }
+
+  static async userExists(req, res, next) {
+    const { email } = req.body;
+    const user = await getUser(email);
+    if (user) {
+      return res.status(409).json({ error: true, message: 'User already exists' });
     }
     return next();
   }
