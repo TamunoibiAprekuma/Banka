@@ -1,8 +1,10 @@
+import passwordHash from 'password-hash';
+
 import Authenticator from '../helpers/Authenticator';
 import userModel from '../models/userModel';
 
 const { generateToken } = Authenticator;
-
+const { getUser } = userModel;
 
 const { create } = userModel;
 export default class UserController {
@@ -13,42 +15,39 @@ export default class UserController {
       user = create(req, res);
       const { id } = user;
       const token = await generateToken({ id });
-      user.token = token;
+      const data = Object.assign({ token }, user);
 
       return res.status(201).json({
         status: 201,
-        data: user,
+        data,
       });
     } catch (err) {
       return res.status(500).json({
-        error: true,
-        message: 'Unable to create user account',
+        status: 500,
+        error: 'Unable to create user account',
       });
     }
   }
 
   static async loginUser(req, res) {
-    const { email, password } = req.body;
-    const sqlQuery = 'SELECT * FROM users WHERE email = $1';
-    const values = [email];
-    let user;
-    const client = await pool.connect();
     try {
-      user = await client.query({ text: sqlQuery, values });
-      if (user.rows && user.rowCount) {
-        user = user.rows[0];
-        if (passwordHash.verify(password, user.password)) {
-          const { id, isadmin } = user;
-          const token = await generateToken({ id, isadmin });
-          return res.status(200).json({ data: [{ token, user }], message: 'Login successful' });
-        }
-        return res.status(401).json({ error: true, message: 'Invalid email or password' });
+      const { email, password } = req.body;
+      const user = await getUser(email);
+      if (!user) { return res.status(401).send({ status: 401, error: 'Invalid username or password' }); }
+
+
+      if (passwordHash.verify(password.trim(), user.password)) {
+        const { id } = user;
+        const token = await generateToken({ id });
+        const data = Object.assign({ token }, user);
+
+
+        return res.status(201).json({
+          status: 201,
+          data,
+        });
       }
-      return res.status(401).json({ error: true, message: 'Invalid email or password' });
-    } catch (err) {
-      return res.status(500).json({ error: true, message: 'Internal server error' });
-    } finally {
-      client.release();
-    }
+      return res.status(401).send({ status: 401, error: 'Invalid username or password' });
+    } catch (err) { return res.status(500).send({ status: 500, error: 'Internal server error' }); }
   }
 }

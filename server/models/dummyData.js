@@ -1,3 +1,5 @@
+import passwordHash from 'password-hash';
+
 export default {
   users: [
     {
@@ -5,7 +7,7 @@ export default {
       email: 'example@example.com',
       firstName: 'Tammy',
       lastName: 'Aprekuma',
-      password: '123453',
+      password: passwordHash.generate('password'),
       type: 'staff',
       isAdmin: true,
     },
@@ -14,7 +16,7 @@ export default {
       email: 'johnoke@gmail.com',
       firstName: 'John',
       lastName: 'Oke',
-      password: 'fjdfdjfdjfdjfj',
+      password: passwordHash.generate('great'),
       type: 'staff',
       isAdmin: false,
     },
@@ -23,7 +25,7 @@ export default {
       email: 'boladeojo@gmail.com',
       firstName: 'Bolade',
       lastName: 'Ojo',
-      password: 'fjdfdjfdjfdjfj',
+      password: passwordHash.generate('123456'),
       type: 'client',
       isAdmin: false,
     },

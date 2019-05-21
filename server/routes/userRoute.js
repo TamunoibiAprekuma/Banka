@@ -3,7 +3,7 @@ import AuthValidator from '../middlewares/AuthValidator';
 import userController from '../controllers/userController';
 
 const { validateSignUp, userExists, validateLogin } = AuthValidator;
-const { createAccount } = userController;
+const { createAccount, loginUser } = userController;
 
 const userRoute = express.Router();
 
