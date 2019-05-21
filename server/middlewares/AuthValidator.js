@@ -18,7 +18,7 @@ export default class AuthValidator {
     req.check('firstName', 'First Name is required').notEmpty().trim();
     req.check('lastName', 'Last Name is required').notEmpty().trim();
     req.check('phone', 'The phone number is required').notEmpty().trim()
-      .isLength({ minb: 11 })
+      .isLength({ min: 11 })
       .withMessage('Enter a valid phone number');
     req.check('password', 'Password is required')
       .notEmpty().trim().isLength({ min: 6 })
@@ -29,8 +29,8 @@ export default class AuthValidator {
     const errors = req.validationErrors();
     if (errors) {
       return res.status(400).json({
-        errors: extractErrors(errors),
         status: 400,
+        error: extractErrors(errors),
       });
     }
     return next();
@@ -40,11 +40,10 @@ export default class AuthValidator {
     const { email } = req.body;
     const user = await getUser(email);
     if (user) {
-      return res.status(409).json({ error: true, message: 'User already exists' });
+      return res.status(409).json({ status: 409, error: 'User already exists' });
     }
     return next();
   }
-
 
   static validateLogin(req, res, next) {
     req.check('email', 'Email is required').notEmpty().isEmail().trim()

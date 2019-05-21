@@ -2,7 +2,7 @@ import express from 'express';
 import AuthValidator from '../middlewares/AuthValidator';
 import userController from '../controllers/userController';
 
-const { validateSignUp, userExists } = AuthValidator;
+const { validateSignUp, userExists, validateLogin } = AuthValidator;
 const { createAccount } = userController;
 
 const userRoute = express.Router();
