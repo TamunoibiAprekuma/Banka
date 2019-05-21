@@ -19,7 +19,6 @@ app.use(expressValidator());
 
 app.use(router);
 // app.use('/v1', router);
-app.use((req, res) => res.send('no such route ensure you have the right CRUD method'));
 
 app.listen(port, () => {
   debugg(`App started at port ${port}`);

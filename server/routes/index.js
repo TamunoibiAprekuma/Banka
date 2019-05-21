@@ -8,6 +8,9 @@ router.get('/', (req, res) => {
 });
 
 router.use('/auth', userRoute);
+router.all('*', (req, res) => {
+  res.status(404).send('No such route');
+});
 
 
 export default router;

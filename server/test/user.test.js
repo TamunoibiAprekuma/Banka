@@ -18,6 +18,7 @@ const user = {
   isAdmin: true,
   type: 'staff',
 };
+
 describe('POST /auth/signup', () => {
   it('Should create user account', async () => {
     try {

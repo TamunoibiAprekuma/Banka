@@ -44,4 +44,20 @@ export default class AuthValidator {
     }
     return next();
   }
+
+
+  static validateLogin(req, res, next) {
+    req.check('email', 'Email is required').notEmpty().isEmail().trim()
+      .withMessage('Invalid email');
+    req.check('password', 'Password is required').notEmpty().trim();
+
+    const errors = req.validationErrors();
+    if (errors) {
+      return res.status(400).json({
+        errors: extractErrors(errors),
+        status: 400,
+      });
+    }
+    return next();
+  }
 }
