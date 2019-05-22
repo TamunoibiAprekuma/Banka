@@ -1,3 +1,4 @@
+import moment from 'moment';
 import passwordHash from 'password-hash';
 
 export default {
@@ -20,14 +21,48 @@ export default {
       type: 'staff',
       isAdmin: false,
     },
+  ],
+  accounts: [
     {
-      id: 3,
-      email: 'boladeojo@gmail.com',
-      firstName: 'Bolade',
-      lastName: 'Ojo',
-      password: passwordHash.generate('123456'),
-      type: 'client',
-      isAdmin: false,
+      id: 1,
+      accountNumber: 222010771,
+      createdOn: moment(),
+      owner: 1,
+      type: 'savings',
+      status: 'active',
+      balance: 20000.95,
+    },
+    {
+      id: 2,
+      accountNumber: 222010872,
+      createdOn: moment(),
+      owner: 3,
+      type: 'current',
+      status: 'dormant',
+      balance: 400000.95,
+    },
+  ],
+  transactions: [
+    {
+      transactionId: 1,
+      accountNumber: 222010771,
+      cashier: 1,
+      transactionType: 'credit',
+      accountBalance: '50000.00',
+    },
+    {
+      transactionId: 2,
+      accountNumber: 222010772,
+      cashier: 1,
+      transactionType: 'debit',
+      accountBalance: '10000.00',
+    },
+    {
+      transactionId: 3,
+      accountNumber: 222010773,
+      cashier: 1,
+      transactionType: 'debit',
+      accountBalance: '10000.00',
     },
   ],
 };

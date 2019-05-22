@@ -5,9 +5,9 @@ import userController from '../controllers/userController';
 const { validateSignUp, userExists, validateLogin } = AuthValidator;
 const { createAccount, loginUser } = userController;
 
-const userRoute = express.Router();
+const userRouter = express.Router();
 
-userRoute.post('/signup', validateSignUp, userExists, createAccount);
-userRoute.post('/login', validateLogin, loginUser);
+userRouter.post('/signup', validateSignUp, userExists, createAccount);
+userRouter.post('/login', validateLogin, loginUser);
 
-export default userRoute;
+export default userRouter;

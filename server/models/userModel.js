@@ -22,8 +22,8 @@ export default class UserModel {
       lastName,
       password: hashedpassword,
       phone,
-      isAdmin,
       type,
+      isAdmin,
       DateCreated: moment(),
     };
 
