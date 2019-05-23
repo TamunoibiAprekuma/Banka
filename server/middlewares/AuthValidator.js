@@ -1,10 +1,13 @@
+import validate from 'validate.js';
 import Helpers from '../helpers/Helpers';
+import authentication from '../helpers/Authenticator';
 
 
 import userModel from '../models/userModel';
 
 const { extractErrors } = Helpers;
 const { getUser } = userModel;
+const { decode } = authentication;
 
 
 export default class AuthValidator {
@@ -57,6 +60,30 @@ export default class AuthValidator {
         errors: extractErrors(errors),
       });
     }
+    return next();
+  }
+
+  static checkToken(req, res, next) {
+    const token = req.body.token || req.headers.token;
+
+    try {
+      if (validate.isEmpty(token)) {
+        return res.status(401).send({
+          status: 401,
+          error: 'Unauthorized',
+        });
+      }
+      const decodedToken = decode(token);
+      if (decodedToken.id) {
+        return next();
+      }
+    } catch (err) {
+      return res.status(401).send({
+        status: 401,
+        error: 'Unauthorized',
+      });
+    }
+
     return next();
   }
 }

@@ -24,6 +24,10 @@ class Authenticator {
   static verifyToken(token) {
     return jwt.verify(token, SECRET);
   }
+
+  static decode(token) {
+    return jwt.verify(token, process.env.SECRET);
+  }
 }
 
 export default Authenticator;

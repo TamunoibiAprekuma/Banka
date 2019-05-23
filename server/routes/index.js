@@ -10,6 +10,11 @@ router.get('/', (req, res) => {
 
 router.use('/auth', userRouter);
 router.use('/accounts', accountRoute);
+
+router.get('/users/me', (req, res) => {
+  const token = req.header('x-auth');
+  res.send(token);
+});
 router.all('*', (req, res) => {
   res.status(404).send('No such route');
 });
