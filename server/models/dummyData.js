@@ -26,20 +26,20 @@ export default {
     {
       id: 1,
       accountNumber: 222010771,
-      createdOn: moment(),
       owner: 1,
       type: 'savings',
       status: 'active',
       balance: 20000.95,
+      dateCreated: moment(),
     },
     {
       id: 2,
       accountNumber: 222010872,
-      createdOn: moment(),
       owner: 3,
       type: 'current',
       status: 'dormant',
       balance: 400000.95,
+      dateCreated: moment(),
     },
   ],
   transactions: [

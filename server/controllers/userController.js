@@ -16,7 +16,6 @@ export default class UserController {
       const { id } = user;
       const token = await generateToken({ id });
       const data = Object.assign({ token }, user);
-      //   res.send(data);
 
       return res.status(201).json({
         status: 201,
