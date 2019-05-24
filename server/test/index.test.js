@@ -18,7 +18,7 @@ describe('GET /', () => {
 
 describe('No matching routes', () => {
   it('should return status 404 and a message', (done) => {
-    chai.request(server)
+    chai.request(app)
       .get('/dsddsdsds')
       .end((err, res) => {
         expect(res.status).to.be.equal(404);
