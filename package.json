@@ -5,7 +5,6 @@
   "main": "\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001bapp\u001b[C\u001b\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b.js)\u001b[C\u001b",
   "scripts": {
     "start": "babel-node app.js",
-    "bootcamp:build": "babel app.js -d build && build/app.js",
     "dev": "nodemon app.js --exec babel-node --presets babel-preset-env",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -39,7 +38,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
-    "babel-plugin-istanbul": "^5.1.1",
+    "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -56,7 +55,6 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.2",
-    "istanbul": "^0.4.5",
     "mocha": "^6.1.4",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^14.1.1"
