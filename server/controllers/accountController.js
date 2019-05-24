@@ -20,4 +20,16 @@ export default class AccountController {
       });
     }
   }
+
+  static modifyAccountStatus(req, res) {
+    const { accountId } = req.params;
+    res.send(accountId);
+    // const account = { text: 'SELECT * FROM questions WHERE ID = $1', values: [id] };
+    /*
+    !  Steps
+    1. Get the accountId
+    2. Change the staus of the account.status from old status to new status
+    3. Push the new status to account.status
+    */
+  }
 }
