@@ -17,6 +17,8 @@ export default class AccountModel {
     const { type } = req.body;
     const token = req.body.token || req.headers.token;
     const decodedToken = decode(token);
+    // console.log(decodedToken); // { id: 1, iat: 1558795050, exp: 1558805850 }
+
     const owner = decodedToken.id;
 
 

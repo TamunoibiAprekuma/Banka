@@ -13,8 +13,8 @@ export default class UserController {
 
     try {
       user = create(req, res);
-      const { id } = user;
-      const token = await generateToken({ id });
+      const { id, isAdmin } = user;
+      const token = await generateToken({ id, isAdmin });
       const data = Object.assign({ token }, user);
 
       return res.status(201).json({
@@ -37,8 +37,9 @@ export default class UserController {
 
 
       if (passwordHash.verify(password.trim(), user.password)) {
-        const { id } = user;
-        const token = await generateToken({ id });
+        const { id, isAdmin } = user;
+        const token = await generateToken({ id, isAdmin });
+
         const data = Object.assign({ token }, user);
 
 

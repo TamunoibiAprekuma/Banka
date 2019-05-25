@@ -30,6 +30,9 @@ export default class AccountController {
     1. Get the accountId
     2. Change the staus of the account.status from old status to new status
     3. Push the new status to account.status
+
+    ! Stopped
+    valdiateStatus of the account controller validation
     */
   }
 }
