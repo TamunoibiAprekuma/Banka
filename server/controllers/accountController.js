@@ -82,8 +82,8 @@ Right now it is only acessible to only admin = true
 
 2. Can't set headers after they are sent
 This issue is when you search if the accountExits and return 404 response. The problem with
-this responsse stycle does not terminate but continues and attempts to set the header again
-HACK: You could have a middleware that validates that the userExists or that then no need to send 404 response
+this response cycle does not terminate but continues and the next function is also being called immediately afterwards and attempts to set the header again
+HACK: You could use a middleware that validates that the userExists or that then no need to send 404 response
 
 FIXME: PATCH /account/<account-number>
 Current response spec
