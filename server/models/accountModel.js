@@ -58,4 +58,20 @@ export default class AccountModel {
     accounts.splice(accountIndex, 1, account);
     return account;
   }
+
+  static remove(req, res) {
+    const { accountId } = req.params;
+    let accountIndex;
+
+    const account = accounts.find((eachAccount, index) => {
+      if (eachAccount.id === parseInt(accountId, 10)) {
+        accountIndex = index;
+        return eachAccount;
+      }
+    });
+
+    if (!account) { return res.status(404).send({ status: 404, error: 'The Account does not exist' }); }
+    accounts.splice(accountIndex, 1);
+    return 'Account successfully deleted';
+  }
 }
