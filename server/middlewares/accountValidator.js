@@ -21,7 +21,7 @@ export default class AccountValidator {
   }
 
   static validateParam(req, res, next) {
-    req.checkParams('partyId', 'The party ID must be an integer').notEmpty().isInt();
+    req.checkParams('accountId', 'The account ID must be a number').notEmpty().isInt();
     const errors = req.validationErrors();
     if (errors) {
       return res.status(400).json({
@@ -32,7 +32,21 @@ export default class AccountValidator {
     return next();
   }
 
-  static validateStatus(req, res) {
+  static validateStatus(req, res, next) {
     const { accountStatus } = req.body;
+
+    if (!validate.isString(accountStatus) || validate.isEmpty(accountStatus)) {
+      return res.status(400).send({
+        status: 400,
+        error: 'account status is required and must be a string',
+      });
+    }
+    if (accountStatus.toLowerCase() === 'active' || accountStatus.toLowerCase() === 'dormant') {
+      return next();
+    }
+    return res.status(400).send({
+      status: 400,
+      error: 'account status must be either active or dormant',
+    });
   }
 }

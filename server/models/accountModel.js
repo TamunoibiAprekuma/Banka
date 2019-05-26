@@ -1,5 +1,6 @@
 import moment from 'moment';
 import randomNumber from 'random-number';
+import { log } from 'util';
 import dummyData from './dummyData';
 import authentication from '../helpers/Authenticator';
 
@@ -38,5 +39,23 @@ export default class AccountModel {
     } catch (err) {
       return res.status(500).json({ error: true, message: 'Internal Server error' });
     }
+  }
+
+  static modify(req, res) {
+    const { accountId } = req.params;
+    const { accountStatus } = req.body;
+    let accountIndex;
+
+    const account = accounts.find((eachAccount, index) => {
+      if (eachAccount.id === parseInt(accountId, 10)) {
+        accountIndex = index;
+        return eachAccount;
+      }
+    });
+    if (!account) { return res.status(404).send({ status: 404, error: 'The Account does not exist' }); }
+
+    account.status = accountStatus;
+    accounts.splice(accountIndex, 1, account);
+    return account;
   }
 }

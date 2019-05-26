@@ -21,6 +21,15 @@ export default {
       type: 'staff',
       isAdmin: false,
     },
+    {
+      id: 3,
+      email: 'johnoke@gmail.com',
+      firstName: 'John',
+      lastName: 'Oke',
+      password: passwordHash.generate('great'),
+      type: 'customer',
+      isAdmin: false,
+    },
   ],
   accounts: [
     {
