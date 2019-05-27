@@ -70,7 +70,7 @@ export default class AccountModel {
       }
     });
 
-    if (!account) { return res.status(404).send({ status: 404, error: 'The Account does not exist' }); }
+    if (!account) { return false; }
     accounts.splice(accountIndex, 1);
     return 'Account successfully deleted';
   }

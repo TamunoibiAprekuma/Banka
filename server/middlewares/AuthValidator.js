@@ -78,7 +78,6 @@ export default class AuthValidator {
         return next();
       }
     } catch (err) {
-      console.log(token);
       return res.status(401).send({
         status: 401,
         error: 'Unauthorized cos not match',
@@ -100,6 +99,31 @@ export default class AuthValidator {
       const decodedToken = decode(token);
 
       if (decodedToken.isAdmin) {
+        return next();
+      }
+    } catch (err) {
+      return res.status(401).send({
+        status: 401,
+        error: 'Unauthorized',
+      });
+    }
+
+    return next();
+  }
+
+  static isStaff(req, res, next) {
+    const token = req.body.token || req.headers.token;
+    try {
+      if (validate.isEmpty(token)) {
+        return res.status(401).send({
+          status: 401,
+          error: 'Unauthorized',
+        });
+      }
+      const decodedToken = decode(token);
+      console.log('TCL: AuthValidator -> isStaff -> token', decodedToken);
+
+      if (decodedToken.type === 'cashier') {
         return next();
       }
     } catch (err) {

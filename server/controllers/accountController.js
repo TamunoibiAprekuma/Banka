@@ -53,10 +53,13 @@ export default class AccountController {
     try {
       const message = remove(req, res);
 
-      return res.status(200).json({
-        status: 200,
-        message,
-      });
+      if (message) {
+        return res.status(200).json({
+          status: 200,
+          message,
+        });
+      }
+      res.status(404).send({ status: 404, error: 'The Account does not exist' });
     } catch (err) {
       return res.status(500).json({
         status: 500,
@@ -83,7 +86,7 @@ Right now it is only acessible to only admin = true
 2. Can't set headers after they are sent
 This issue is when you search if the accountExits and return 404 response. The problem with
 this response cycle does not terminate but continues and the next function is also being called immediately afterwards and attempts to set the header again
-HACK: You could use a middleware that validates that the userExists or that then no need to send 404 response
+I have fixed this. But other routes before it likely have the same problem
 
 FIXME: PATCH /account/<account-number>
 Current response spec
