@@ -5,7 +5,7 @@ import dummyData from './dummyData';
 import authentication from '../helpers/Authenticator';
 
 
-const { accounts } = dummyData;
+const { accounts. transactions } = dummyData;
 const { decode } = authentication;
 const options = {
   min: 9874316514,
@@ -23,8 +23,8 @@ export default class AccountModel {
     const cashier = decodedToken.id;
 
 
-    const account = {
-      id: accounts.length + 1,
+    const transaction = {
+      id: tra.length + 1,
       accountNumber: randomNumber(options),
       cashier,
       type,
